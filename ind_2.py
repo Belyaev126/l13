@@ -62,14 +62,14 @@ class Staff:
         )
         table.append(line)
 
-        for idx, people in enumerate(peoples, 1):
+        for idx, people in enumerate(self.peoples, 1):
             table.append(
                 '| {:>4} | {:<20} | {:<20} | {:<20} | {:>15} |'.format(
                     idx,
-                    people.get('surname', ''),
-                    people.get('name', ''),
-                    people.get('number', ''),
-                    people.get('year', 0)
+                    people.surname,
+                    people.name,
+                    people.number,
+                    people.year
                 )
             )
         table.append(line)
@@ -85,10 +85,10 @@ class Staff:
         for people in self.peoples:
             if people.get('surname') == sur:
                 count += 1
-                print('Фамилия:', people.get('surname', ''))
-                print('Имя:', people.get('name', ''))
-                print('Номер телефона:', people.get('number', ''))
-                print('Дата рождения:', people.get('year', ''))
+                print('Фамилия:', people.surname)
+                print('Имя:', people.name)
+                print('Номер телефона:', people.number)
+                print('Дата рождения:', people.year)
 
         if count == 0:
             print("Таких фамилий нет !")
@@ -173,13 +173,14 @@ class Staff:
                 sur = (parts[1])
 
                 count = 0
+                
                 for people in peoples:
                     if people.get('surname') == sur:
                         count += 1
-                        print('Фамилия:', people.get('surname', ''))
-                        print('Имя:', people.get('name', ''))
-                        print('Номер телефона:', people.get('number', ''))
-                        print('Дата рождения:', people.get('year', ''))
+                        print('Фамилия:', people.surname('surname', ''))
+                        print('Имя:', people.name('name', ''))
+                        print('Номер телефона:', people.number('number', ''))
+                        print('Дата рождения:', people.year('year', ''))
 
                 if count == 0:
                     print("Таких фамилий нет !")
