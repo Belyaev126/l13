@@ -127,7 +127,7 @@ class Staff:
         def save(self, filename):
             root = ET.Element('peoples')
             for people in self.peoples:
-                people_element = ET.Element('peoples')
+                people_element = ET.Element('people')
 
                 surname_element = ET.SubElement(people_element, 'surname')
                 surname_element.text = people.surname
@@ -177,10 +177,10 @@ class Staff:
                 for people in peoples:
                     if people.get('surname') == sur:
                         count += 1
-                        print('Фамилия:', people.surname('surname', ''))
-                        print('Имя:', people.name('name', ''))
-                        print('Номер телефона:', people.number('number', ''))
-                        print('Дата рождения:', people.year('year', ''))
+                        print('Фамилия:', people.surname)
+                        print('Имя:', people.name)
+                        print('Номер телефона:', people.number)
+                        print('Дата рождения:', people.year)
 
                 if count == 0:
                     print("Таких фамилий нет !")
