@@ -26,7 +26,7 @@ class people:
 
 
 @dataclass
-class peoples:
+class Staff:
     peoples: List[people] = field(default_factory=lambda: [])
 
     def add(self, surname, name, number, year):
@@ -63,7 +63,7 @@ class peoples:
         table.append(line)
 
         for idx, people in enumerate(peoples, 1):
-            print(
+            table.append(
                 '| {:>4} | {:<20} | {:<20} | {:<20} | {:>15} |'.format(
                     idx,
                     people.get('surname', ''),
@@ -150,7 +150,7 @@ class peoples:
 
     if __name__ == '__main__':
         peoples = []
-        people = people
+        staff = Staff
         while True:
             command = input(">>> ").lower()
             if command == 'exit':
@@ -161,10 +161,12 @@ class peoples:
                 name = input("Имя ")
                 number = int(input("Номер телефона "))
                 year = input("Дата рождения в формате: дд.мм.гггг ")
+                
+                staff.add(surname, name, number, year)
 
 
             elif command == 'list':
-                print(people)
+                print(staff)
 
             elif command.startswith('select '):
                 parts = command.split(' ', maxsplit=2)
@@ -184,21 +186,11 @@ class peoples:
 
             elif command.startswith('load '):
                 parts = command.split(' ', maxsplit=1)
-
-                if 'xml' in parts[1]:
-                    print('Загрузка')
-                elif 'json' in parts[1]:
-                    with open(parts[1], 'r') as f:
-                        peoples = json.load(f)
-
+                staff.load(parts[1])
+                
             elif command.startswith('save '):
                 parts = command.split(' ', maxsplit=1)
-
-                if 'xml' in parts[1]:
-                    print('Сохранение')
-                elif 'json' in parts[1]:
-                    with open(parts[1], 'w')as f:
-                        json.dump(peoples, f)
+                staff.save(parts[1])
 
             elif command == 'help':
                 print("Список команд:\n")
